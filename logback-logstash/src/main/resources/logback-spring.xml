@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>127.0.0.1:9999</destination>
+        <includeCallerData>true</includeCallerData>
+
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeCallerData>true</includeCallerData>
+        </encoder>
+    </appender>
+    <logger name="com.example.logbacklogstash" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="stash" />
+        <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="root" level="warn" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="stash" />
+        <appender-ref ref="FILE"/>
+    </logger>
+</configuration>
